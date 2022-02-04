@@ -1,17 +1,17 @@
 (function () {
     'use strict'
 
-    // function GenerateGoogleHeadTag(google_tag_id) {
-    //     var google_Script = `<!-- Google Tag Manager -->
-    //     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    //     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    //     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    //     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    //     })(window,document,'script','dataLayer','GTM-XXXX');</script>
-    //     <!-- End Google Tag Manager -->`;
+    function GenerateGoogleHeadTag(google_tag_id) {
+        var google_Script = `<!-- Google Tag Manager -->
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-XXXX');</script>
+        <!-- End Google Tag Manager -->`;
 
-    //     return google_Script.replace("GTM-XXXX", google_tag_id);
-    // }
+        return google_Script.replace("GTM-XXXX", google_tag_id);
+    }
 
     function GenerateGoogleBodyTag(google_tag_id) {
         var google_body_script = `<!-- Google Tag Manager (noscript) -->
@@ -82,10 +82,11 @@
         }
 
     }
+    
+    document.addEventListener('readystatechange', event => {
+        if (event.target.readyState === "complete") {
+            main()
+        }
+    })
 
-    if (document.readyState == 'loading') {
-        window.addEventListener('DOMContentLoaded', main)
-    } else {
-        main()
-    }
 })()
